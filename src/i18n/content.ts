@@ -61,6 +61,7 @@ export interface SiteContent {
       handoff: string;
       task: string;
       worker: string;
+      workerChat: string;
       result: string;
       time: string;
     };
@@ -134,7 +135,7 @@ const en: SiteContent = {
   },
   hero: {
     title: "Build smarter AI teams",
-    description: "OpenBee turns the agent CLI you already use into a team of always-on workers. Message Bee, and it hands the job to the right worker and brings the result back to the same chat.",
+    description: "OpenBee turns the agent CLI you already use into a team of always-on workers. Message Bee, and it hands the job to the right worker. Results come back to your chat app, or to the worker's own chat in the desktop app and browser.",
     primary: "Download OpenBee",
     secondary: "View on GitHub",
     installLabel: "Install with Homebrew",
@@ -150,9 +151,9 @@ const en: SiteContent = {
     title: "A team that works where you already are",
     description: "Each worker is an agent CLI with its own job, folder and rules. Bee keeps them busy.",
     items: [
-      { icon: "chat", title: "Delegate by chatting", text: "Say what you need. A worker does it on your machine and replies in the same chat." },
+      { icon: "chat", title: "Delegate by chatting", text: "Say what you need. A worker does it on your machine and replies in your chat app, or in its own chat on the desktop and web." },
       { icon: "workers", title: "Run several agents at once", text: "Each worker has its own engine, working folder and rules, so jobs run side by side." },
-      { icon: "schedule", title: "Schedule work", text: "Run a task now, after a delay, or on a cron schedule. Results come back to the chat that asked." },
+      { icon: "schedule", title: "Schedule work", text: "Run a task now, after a delay, or on a cron schedule. Results reach the chat app that asked, or the worker's chat on the desktop and web." },
       { icon: "anywhere", title: "Reach it from anywhere", text: "Use the desktop app, the web console, or Lark, DingTalk, WeCom, WeChat, Telegram, Discord and Linear." },
       { icon: "selfhost", title: "Self-hosted", text: "It runs on your computer or server, and your data stays in ~/.openbee." },
       { icon: "plugins", title: "Plugins without restarts", text: "Install, configure and update engines and chat channels while OpenBee keeps running." },
@@ -160,11 +161,11 @@ const en: SiteContent = {
   },
   howItWorks: {
     title: "How a task moves through your team",
-    description: "You talk to one coordinator. Bee finds the right worker and reports back.",
+    description: "You talk to one coordinator. Bee finds the right worker, and the worker reports back.",
     steps: [
       { title: "You message Bee", text: "Write to Bee from the desktop app, the browser or a chat app, in plain words." },
       { title: "Bee picks the worker", text: "Bee hands the job to the worker whose engine, folder and rules fit, or creates a new one." },
-      { title: "The worker reports back", text: "The worker runs the job on your machine with your agent CLI. The result lands in the same chat." },
+      { title: "The worker reports back", text: "The worker runs the job on your machine with your agent CLI. In a chat app the result lands in the same chat. In the desktop app and browser, open Bee's handoff card to see it in the worker's chat." },
     ],
     sample: {
       label: "Sample conversation",
@@ -175,6 +176,7 @@ const en: SiteContent = {
       handoff: "Handed off to Maya Lin",
       task: "Fix the login redirect bug and add a regression test",
       worker: "Maya Lin",
+      workerChat: "Maya Lin's chat",
       result: "Fixed: the redirect keeps the return URL now. Regression test added, PR #212 is green.",
       time: "19:44",
     },
@@ -219,7 +221,7 @@ const en: SiteContent = {
       { id: "data", question: "Where does my data live?", answer: "On the machine that runs OpenBee. Workers, tasks and chats are stored in ~/.openbee on your computer or server." },
       { id: "edition", question: "Should I install the desktop app or the server?", answer: "Pick the desktop app for your own computer: the server is built in. Pick the server for an always-on machine, then reach it from the browser, a chat app or the client-only desktop build." },
       { id: "channels", question: "Which chat apps can I use?", answer: "Lark, DingTalk, WeCom, WeChat, Telegram, Discord and Linear, each through a channel plugin. The desktop app and the web console work without any plugin." },
-      { id: "schedule", question: "Can workers run on a schedule?", answer: "Yes. A task runs now, after a delay, or on a cron schedule, and its result comes back to the chat that asked for it." },
+      { id: "schedule", question: "Can workers run on a schedule?", answer: "Yes. A task runs now, after a delay, or on a cron schedule. In a chat app its result comes back to the chat that asked for it. In the desktop app and web console it shows up in the worker's own chat." },
       { id: "blocked", question: "The desktop app is blocked on first launch. What do I do?", answer: "Builds are not code signed yet. On macOS, right-click the app and choose Open, or use Open Anyway in System Settings → Privacy & Security. On Windows, click More info, then Run anyway." },
       { id: "plugins", question: "Can I write my own plugin?", answer: "Yes. Engines and chat channels are plugins, and both protocols are documented in the OpenBee repository." },
     ],
@@ -274,7 +276,7 @@ const zh: SiteContent = {
   },
   hero: {
     title: "打造更聪明的 AI 团队",
-    description: "OpenBee 把你已经在用的 Agent CLI 变成一支 7×24 小时在线的数字员工团队。给 Bee 发消息，它会把活派给合适的员工，并在同一个对话里把结果带回来。",
+    description: "OpenBee 把你已经在用的 Agent CLI 变成一支 7×24 小时在线的数字员工团队。给 Bee 发消息，它会把活派给合适的员工。结果回到你的聊天软件；在桌面应用和浏览器里，则回到员工自己的对话。",
     primary: "下载 OpenBee",
     secondary: "在 GitHub 上查看",
     installLabel: "用 Homebrew 安装",
@@ -290,9 +292,9 @@ const zh: SiteContent = {
     title: "一支就在你身边干活的团队",
     description: "每个员工都是一个 Agent CLI，有自己的职责、目录和规则，Bee 负责调度。",
     items: [
-      { icon: "chat", title: "聊天就能派活", text: "说出需求，员工在你的机器上完成，并在同一个对话里回复。" },
+      { icon: "chat", title: "聊天就能派活", text: "说出需求，员工在你的机器上完成，在聊天软件里直接回复，在桌面应用和网页里则在自己的对话里回复。" },
       { icon: "workers", title: "多个 Agent 同时干活", text: "每个员工有自己的引擎、工作目录和规则，任务可以并行推进。" },
-      { icon: "schedule", title: "定时任务", text: "任务可以立即执行、延时执行，或按 cron 周期执行，结果回到发起的对话。" },
+      { icon: "schedule", title: "定时任务", text: "任务可以立即执行、延时执行，或按 cron 周期执行。结果回到发起的聊天软件对话；在桌面应用和网页里，则在员工自己的对话里。" },
       { icon: "anywhere", title: "随处可用", text: "桌面应用、Web 控制台，或飞书、钉钉、企业微信、微信、Telegram、Discord、Linear。" },
       { icon: "selfhost", title: "自托管", text: "跑在你自己的电脑或服务器上，数据都在 ~/.openbee。" },
       { icon: "plugins", title: "插件免重启", text: "引擎和聊天渠道在 OpenBee 运行时即可安装、配置和更新。" },
@@ -300,11 +302,11 @@ const zh: SiteContent = {
   },
   howItWorks: {
     title: "一个任务如何在团队里流转",
-    description: "你只需要和协调者 Bee 对话，它会找到合适的员工并回报结果。",
+    description: "你只需要和协调者 Bee 对话，它会找到合适的员工，由员工回报结果。",
     steps: [
       { title: "你给 Bee 发消息", text: "在桌面应用、浏览器或聊天软件里，用平常的话说出需求。" },
       { title: "Bee 挑选员工", text: "Bee 把活交给引擎、目录和规则都匹配的员工，没有合适的就新建一个。" },
-      { title: "员工回报结果", text: "员工用你的 Agent CLI 在你的机器上完成任务，结果回到同一个对话。" },
+      { title: "员工回报结果", text: "员工用你的 Agent CLI 在你的机器上完成任务。在聊天软件里，结果回到同一个对话；在桌面应用和浏览器里，点开 Bee 的交接卡片，在员工的对话里查看。" },
     ],
     sample: {
       label: "示例对话",
@@ -315,6 +317,7 @@ const zh: SiteContent = {
       handoff: "已交给 林知夏",
       task: "修复登录跳转的 bug，并补一个回归测试",
       worker: "林知夏",
+      workerChat: "林知夏的对话",
       result: "已修复：跳转现在会保留返回地址。回归测试已补上，PR #212 全绿。",
       time: "19:44",
     },
@@ -359,7 +362,7 @@ const zh: SiteContent = {
       { id: "data", question: "数据存在哪里？", answer: "存在运行 OpenBee 的机器上。员工、任务和对话都保存在你电脑或服务器的 ~/.openbee 里。" },
       { id: "edition", question: "该装桌面版还是服务端？", answer: "自己的电脑选桌面版，它内置了服务端。常开的机器选服务端，再通过浏览器、聊天软件或纯客户端版桌面应用访问。" },
       { id: "channels", question: "支持哪些聊天软件？", answer: "飞书、钉钉、企业微信、微信、Telegram、Discord 和 Linear，各自通过渠道插件接入。桌面应用和 Web 控制台无需插件。" },
-      { id: "schedule", question: "员工可以定时干活吗？", answer: "可以。任务可以立即执行、延时执行，或按 cron 周期执行，结果会回到发起它的对话。" },
+      { id: "schedule", question: "员工可以定时干活吗？", answer: "可以。任务可以立即执行、延时执行，或按 cron 周期执行。在聊天软件里，结果回到发起它的对话；在桌面应用和 Web 控制台里，结果在员工自己的对话里。" },
       { id: "blocked", question: "首次打开桌面版被系统拦截怎么办？", answer: "发布包暂未做代码签名。macOS 上右键点击应用选择“打开”，或在“系统设置 → 隐私与安全性”中点击“仍要打开”。Windows 上点击“更多信息”，再点击“仍要运行”。" },
       { id: "plugins", question: "可以自己写插件吗？", answer: "可以。引擎和聊天渠道都是插件，两种插件协议都在 OpenBee 仓库里有文档。" },
     ],

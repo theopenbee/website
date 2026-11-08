@@ -54,6 +54,7 @@ const initials = sample.worker.includes(" ") ? sample.worker.split(" ").map(part
         </div>
       </div>
     </div>
+    <p class="switch">{sample.workerChat}</p>
     <div class="row">
       <span class="avatar worker" aria-hidden="true">{initials}</span>
       <div class="body">
@@ -157,6 +158,22 @@ const initials = sample.worker.includes(" ") ? sample.worker.split(" ").map(part
     color: var(--text-muted);
     font-weight: 400;
     font-variant-numeric: tabular-nums;
+  }
+
+  .switch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+  }
+
+  .switch::before,
+  .switch::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--border);
   }
 
   .bubble {
