@@ -46,6 +46,25 @@ export default defineConfig({
           items: ["docs", "docs/desktop", "docs/server", "docs/plugins"],
         },
         {
+          label: "Guides",
+          translations: { "zh-CN": "使用指南" },
+          items: ["docs/workers", "docs/tasks", "docs/constraints", "docs/commands"],
+        },
+        {
+          label: "Chat apps",
+          translations: { "zh-CN": "聊天平台" },
+          items: [
+            "docs/chat-apps",
+            "docs/chat-apps/feishu",
+            "docs/chat-apps/dingtalk",
+            "docs/chat-apps/wecom",
+            "docs/chat-apps/weixin",
+            "docs/chat-apps/telegram",
+            "docs/chat-apps/discord",
+            "docs/chat-apps/linear",
+          ],
+        },
+        {
           label: "Write a plugin",
           translations: { "zh-CN": "编写插件" },
           items: [

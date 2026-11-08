@@ -22,7 +22,7 @@ Engines and chat channels are plugins. A running OpenBee installs, configures, e
 
 ## From the app
 
-In the desktop app or the web console, open **Settings → Plugins → Marketplace**, install a plugin, then fill in its settings on the plugin page.
+In the desktop app or the web console, open **Settings → Plugins → Marketplace**, install a plugin, then fill in its settings on the plugin page. Each chat app's setup is in [Chat apps](/docs/chat-apps/).
 
 ## From the command line
 

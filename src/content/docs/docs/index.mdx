@@ -5,29 +5,29 @@ description: OpenBee turns Claude Code, Codex or pi into a team of always-on wor
 
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
 
-OpenBee turns the agent CLI you already use (Claude Code, Codex or pi) into a team of always-on workers. Message Bee, the coordinator, from the desktop app, the browser or your chat app, and Bee hands the job to the right worker.
+OpenBee turns the agent CLI you already use (Claude Code, Codex or pi) into a team of always-on workers. You message Bee, the coordinator, and Bee hands each job to the right worker.
 
-## How it works
+## Concepts
 
-- **Bee** is the coordinator you talk to. It hands each job to the worker whose engine, folder and rules fit, or creates a new one.
-- A **worker** is an agent CLI with its own engine, working folder and rules. Several workers run side by side.
-- A **task** is one job for one worker. It runs now, after a delay, or on a cron schedule.
+- **Bee:** the coordinator you talk to, from the desktop app, the browser or a chat app.
+- **Worker:** an agent CLI with its own engine, folder and rules.
+- **Task:** one job for one worker, run now, later or on a schedule.
 
-In a chat app, the result comes back to the same chat. In the desktop app and the browser, each task gets its own worker chat, opened from Bee's handoff card.
+## Requirements
 
-## What you need
-
-One agent CLI (Claude Code, Codex or pi), installed and signed in. OpenBee drives it and ships no model of its own. Workers, tasks and chats stay in `~/.openbee` on the machine that runs OpenBee.
+One agent CLI, installed and signed in. OpenBee ships no model. Your data stays in `~/.openbee`.
 
 ## Install
 
 <CardGrid>
-  <LinkCard title="Desktop app" description="For your own computer. The server is built in, so this is all you install." href="/docs/desktop/" />
-  <LinkCard title="Server and CLI" description="For an always-on machine. Reach it from the browser, a chat app or the desktop client." href="/docs/server/" />
+  <LinkCard title="Desktop app" description="For your own computer. The server is built in." href="/docs/desktop/" />
+  <LinkCard title="Server and CLI" description="For an always-on machine." href="/docs/server/" />
 </CardGrid>
 
-## Then talk to Bee
+## First task
+
+Tell Bee:
 
 > Create a worker named Maya for backend fixes, working in ~/code/api.
 
-Bee creates the worker. Hand it a task the same way. To chat from Lark, Telegram or another app, add a [channel plugin](/docs/plugins/).
+Then hand Maya jobs the same way. Next: [Workers](/docs/workers/), [Tasks](/docs/tasks/), [Chat apps](/docs/chat-apps/).
