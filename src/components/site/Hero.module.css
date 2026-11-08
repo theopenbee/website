@@ -1,0 +1,4 @@
+.hero { background: transparent; }
+.hero > div { gap: var(--space-16); padding-top: var(--space-20); padding-bottom: var(--space-12); }
+.frame { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-panel); box-shadow: var(--shadow-floating); }
+.frame :global(img) { display: block; width: 100%; height: auto; }

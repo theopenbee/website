@@ -1,0 +1,57 @@
+---
+import "@fontsource-variable/geist";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import "@/components/arc/foundation.css";
+import "@/styles/global.css";
+import type { Locale, SiteContent } from "@/i18n/content";
+import { localePath } from "@/i18n/content";
+
+interface Props {
+  locale: Locale;
+  copy: SiteContent;
+}
+
+const { locale, copy } = Astro.props;
+const canonical = new URL(localePath(locale), Astro.site);
+const alternates = (["en", "zh"] as const).map(code => ({ code, href: new URL(localePath(code), Astro.site).href }));
+const ogImage = new URL("/og.png", Astro.site);
+---
+
+<!doctype html>
+<html lang={copy.lang} data-theme="light" data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{copy.meta.title}</title>
+    <meta name="description" content={copy.meta.description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map(item => <link rel="alternate" hreflang={item.code === "zh" ? "zh-CN" : "en"} href={item.href} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates[0]!.href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OpenBee" />
+    <meta property="og:title" content={copy.meta.title} />
+    <meta property="og:description" content={copy.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@0xtyz" />
+    <script is:inline>
+      (function () {
+        var media = window.matchMedia("(prefers-color-scheme: dark)");
+        var apply = function () {
+          document.documentElement.dataset.theme = media.matches ? "dark" : "light";
+        };
+        apply();
+        media.addEventListener("change", apply);
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{copy.skipLink}</a>
+    <slot />
+  </body>
+</html>

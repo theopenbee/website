@@ -1,0 +1,245 @@
+---
+import { ArrowRight } from "lucide-react";
+import type { SiteContent } from "@/i18n/content";
+
+interface Props {
+  how: SiteContent["howItWorks"];
+}
+
+const { how } = Astro.props;
+const { sample } = how;
+const initials = sample.worker.includes(" ") ? sample.worker.split(" ").map(part => part[0]).join("") : sample.worker.slice(-2);
+---
+
+<section id="how-it-works" class="section split" aria-labelledby="how-title">
+  <div class="copy">
+    <div class="section-head">
+      <h2 id="how-title" class="section-title">{how.title}</h2>
+      <p class="section-description">{how.description}</p>
+    </div>
+    <ol class="steps">
+      {how.steps.map((step, index) => (
+        <li>
+          <span class="number" aria-hidden="true">{index + 1}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <figure class="chat" aria-label={sample.label}>
+    <div class="row own">
+      <p class="bubble">{sample.request}</p>
+    </div>
+    <div class="row">
+      <img class="avatar bee" src="/logo-mark.svg" alt="" width="32" height="32" />
+      <div class="body">
+        <span class="name">{sample.bee}</span>
+        <p class="bubble">{sample.reply}</p>
+      </div>
+    </div>
+    <div class="row">
+      <img class="avatar bee" src="/logo-mark.svg" alt="" width="32" height="32" />
+      <div class="body">
+        <span class="name">{sample.bee}</span>
+        <div class="handoff">
+          <span class="avatar worker" aria-hidden="true">{initials}</span>
+          <span class="handoff-text">
+            <span class="handoff-title">{sample.handoff}<ArrowRight size={14} strokeWidth={1.75} aria-hidden="true" /></span>
+            <span class="handoff-task">{sample.task}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <span class="avatar worker" aria-hidden="true">{initials}</span>
+      <div class="body">
+        <span class="name">{sample.worker} <span class="time">{sample.time}</span></span>
+        <p class="bubble">{sample.result}</p>
+      </div>
+    </div>
+    <figcaption>{sample.label}</figcaption>
+  </figure>
+</section>
+
+<style>
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: var(--space-16);
+  }
+
+  .copy {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .number {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .steps h3 {
+    margin: 4px 0 var(--space-1);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    letter-spacing: var(--tracking-body);
+  }
+
+  .steps p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    text-wrap: pretty;
+  }
+
+  .chat {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-surface);
+    padding: var(--space-8) var(--space-6) var(--space-6);
+    background: var(--surface-muted);
+    font-size: var(--text-sm);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+  }
+
+  .row.own {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: end;
+  }
+
+  .body {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .name {
+    font-weight: 500;
+  }
+
+  .time {
+    margin-left: var(--space-1);
+    color: var(--text-muted);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bubble {
+    max-width: 44ch;
+    margin: 0;
+    border-radius: var(--radius-control);
+    padding: 10px var(--space-4);
+    background: var(--surface);
+    box-shadow: var(--shadow-resting);
+    text-wrap: pretty;
+  }
+
+  .own .bubble {
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  .avatar {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    place-items: center;
+    border-radius: var(--radius-pill);
+  }
+
+  .bee {
+    padding: 3px;
+    background: var(--surface);
+    box-shadow: inset 0 0 0 1px var(--border);
+  }
+
+  .worker {
+    background: var(--avatar-worker);
+    color: var(--avatar-foreground);
+    font-size: var(--text-xs);
+    font-weight: 500;
+  }
+
+  .handoff {
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+    gap: var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3);
+    background: var(--surface);
+  }
+
+  .handoff-text {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .handoff-title {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-weight: 500;
+  }
+
+  .handoff-task {
+    color: var(--text-secondary);
+  }
+
+  figcaption {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    text-align: center;
+  }
+
+  @media (max-width: 960px) {
+    .split {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-12);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .chat {
+      padding: var(--space-6) var(--space-4) var(--space-4);
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import { Picture } from "astro:assets";
+import screenshot from "@/assets/openbee-desktop.png";
+import { content, localePath } from "@/i18n/content";
+import type { Locale } from "@/i18n/content";
+import { getLatestRelease } from "@/lib/release";
+import Base from "@/layouts/Base.astro";
+import Cta from "./Cta";
+import Faq from "./Faq";
+import Features from "./Features.astro";
+import Footer from "./Footer";
+import Header from "./Header";
+import Hero from "./Hero";
+import HowItWorks from "./HowItWorks.astro";
+import Integrations from "./Integrations";
+import QuickStart from "./QuickStart";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = content[locale];
+const release = await getLatestRelease();
+const downloadHref = localePath(locale, "#get-started");
+const year = new Date().getFullYear();
+---
+
+<Base locale={locale} copy={copy}>
+  <Header client:load locale={locale} nav={copy.nav} />
+  <main id="main">
+    <Hero client:load hero={copy.hero} downloadHref={downloadHref}>
+      <Picture
+        src={screenshot}
+        alt={copy.hero.screenshotAlt}
+        formats={["avif", "webp"]}
+        widths={[720, 1200, 1800, 2400]}
+        sizes="(max-width: 1240px) calc(100vw - 32px), 1120px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Hero>
+    <div class="integrations">
+      <Integrations client:visible integrations={copy.integrations} />
+    </div>
+    <Features features={copy.features} />
+    <HowItWorks how={copy.howItWorks} />
+    <QuickStart client:visible copy={copy.getStarted} release={release} />
+    <div id="faq" class="anchor">
+      <Faq client:visible faq={copy.faq} />
+    </div>
+    <Cta client:visible cta={copy.cta} downloadHref={downloadHref} />
+  </main>
+  <Footer locale={locale} footer={copy.footer} year={year} />
+</Base>
+
+<style>
+  .integrations {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: var(--space-12) var(--page-gutter) 0;
+  }
+
+  .anchor {
+    border-top: 1px solid var(--border-subtle);
+  }
+</style>

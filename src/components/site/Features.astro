@@ -1,0 +1,107 @@
+---
+import { CalendarClock, HardDrive, MessagesSquare, MonitorSmartphone, Puzzle, UsersRound } from "lucide-react";
+import type { SiteContent } from "@/i18n/content";
+
+interface Props {
+  features: SiteContent["features"];
+}
+
+const { features } = Astro.props;
+const icons = { chat: MessagesSquare, workers: UsersRound, schedule: CalendarClock, anywhere: MonitorSmartphone, selfhost: HardDrive, plugins: Puzzle };
+---
+
+<section id="features" class="section" aria-labelledby="features-title">
+  <div class="section-head">
+    <h2 id="features-title" class="section-title">{features.title}</h2>
+    <p class="section-description">{features.description}</p>
+  </div>
+  <ul class="grid">
+    {features.items.map(item => {
+      const Icon = icons[item.icon];
+      return (
+        <li class="item">
+          <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-8) var(--space-8) var(--space-10) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .item:not(:nth-child(3n + 1)) {
+    padding-left: var(--space-8);
+    border-left: 1px solid var(--border-subtle);
+  }
+
+  .item :global(svg) {
+    margin-bottom: var(--space-3);
+    color: var(--accent);
+  }
+
+  .item h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    letter-spacing: var(--tracking-body);
+  }
+
+  .item p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .item:not(:nth-child(3n + 1)) {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .item:nth-child(even) {
+      padding-left: var(--space-6);
+      border-left: 1px solid var(--border-subtle);
+    }
+
+    .item {
+      padding-right: var(--space-6);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .item,
+    .item:nth-child(even) {
+      padding: var(--space-6) 0;
+      border-left: 0;
+    }
+  }
+</style>

@@ -1,0 +1,2 @@
+.footer { --footer-pad: max(var(--space-6), calc((100% - 1152px) / 2)); }
+.mark { display: block; width: 24px; height: 24px; }
