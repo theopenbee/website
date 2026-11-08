@@ -1,0 +1,45 @@
+---
+import LanguageLink from "./LanguageLink.astro";
+import { REPO_URL, content, localePath } from "@/i18n/content";
+
+const locale = Astro.locals.starlightRoute.locale === "zh" ? "zh" : "en";
+const { nav } = content[locale];
+---
+
+<div class="docs-mobile-footer">
+  <LanguageLink />
+  <a class="link" href={REPO_URL}>GitHub</a>
+  <a class="download" href={localePath(locale, "#get-started")}>{nav.download}</a>
+</div>
+
+<style>
+  .docs-mobile-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    border-top: 1px solid var(--border);
+    padding: var(--space-4) 0;
+  }
+
+  .docs-mobile-footer :global(.docs-language),
+  .link,
+  .download {
+    display: inline-flex;
+    height: var(--control-height-sm);
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    padding: 0 14px;
+    color: var(--foreground);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .download {
+    margin-left: auto;
+    border-color: var(--foreground);
+    background: var(--foreground);
+    color: var(--background);
+  }
+</style>

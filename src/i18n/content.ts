@@ -1,7 +1,6 @@
 export type Locale = "en" | "zh";
 
 export const REPO_URL = "https://github.com/theopenbee/openbee";
-export const DOCS_URL = "https://docs.theopenbee.com";
 export const RELEASES_URL = `${REPO_URL}/releases`;
 export const ISSUES_URL = `${REPO_URL}/issues`;
 export const X_URL = "https://x.com/0xtyz";
@@ -196,10 +195,10 @@ const en: SiteContent = {
     allDownloads: "All downloads",
     packageManagers: "Or use a package manager",
     desktopNote: "Builds are not code signed yet, so the system asks you to approve the app once.",
-    firstLaunch: { label: "First launch", href: `${REPO_URL}/blob/main/docs/desktop.md#first-launch`, external: true },
+    firstLaunch: { label: "First launch", href: "/docs/desktop/#first-launch" },
     serverIntro: "Install the CLI from npm, start the server in the background and add an engine.",
     serverNote: "Open localhost:19876 and create the admin account. Swap claude for codex or pi.",
-    serverDocs: { label: "Other install methods", href: `${REPO_URL}/blob/main/docs/server.md`, external: true },
+    serverDocs: { label: "Other install methods", href: "/docs/server/" },
     talkTitle: "Then talk to Bee",
     talkText: "Bee creates the worker. Hand it a task the same way.",
     talkPrompt: "Create a worker named Maya for backend fixes, working in ~/code/api.",
@@ -337,10 +336,10 @@ const zh: SiteContent = {
     allDownloads: "全部下载",
     packageManagers: "也可以用包管理器安装",
     desktopNote: "发布包暂未做代码签名，首次打开时系统会要求你手动放行一次。",
-    firstLaunch: { label: "首次打开", href: `${REPO_URL}/blob/main/docs/desktop.zh.md#首次打开`, external: true },
+    firstLaunch: { label: "首次打开", href: "/zh/docs/desktop/#首次打开" },
     serverIntro: "从 npm 安装命令行，在后台启动服务端，再装一个引擎。",
     serverNote: "打开 localhost:19876 并创建管理员账号。把 claude 换成 codex 或 pi 即可切换引擎。",
-    serverDocs: { label: "其他安装方式", href: `${REPO_URL}/blob/main/docs/server.zh.md`, external: true },
+    serverDocs: { label: "其他安装方式", href: "/zh/docs/server/" },
     talkTitle: "然后，和 Bee 说话",
     talkText: "Bee 会创建这个员工。派任务也是一样，直接说。",
     talkPrompt: "帮我建一个员工，叫 Maya，负责后端修复，工作目录是 ~/code/api。",
@@ -402,4 +401,8 @@ export const content: Record<Locale, SiteContent> = { en, zh };
 
 export function localePath(locale: Locale, hash = "") {
   return `${locale === "en" ? "/" : "/zh/"}${hash}`;
+}
+
+export function docsPath(locale: Locale, page = "") {
+  return localePath(locale, page ? `docs/${page}/` : "docs/");
 }

@@ -51,7 +51,7 @@ export function QuickStart({ copy, release }: QuickStartProps) {
             <h3 className={styles.subtitle}>{copy.packageManagers}</h3>
             <CodeBlock code={DESKTOP_BREW} filename="macOS" language="bash" copyLabel={copy.copyLabel} copiedLabel={copy.copiedLabel} />
             <CodeBlock code={DESKTOP_SCOOP} filename="Windows" language="powershell" copyLabel={copy.copyLabel} copiedLabel={copy.copiedLabel} />
-            <p className={styles.note}>{copy.desktopNote} <External href={copy.firstLaunch.href}>{copy.firstLaunch.label}</External></p>
+            <p className={styles.note}>{copy.desktopNote} <a className={styles.link} href={copy.firstLaunch.href}>{copy.firstLaunch.label}</a></p>
           </div>
         </div>
       </TabsContent>
@@ -62,7 +62,7 @@ export function QuickStart({ copy, release }: QuickStartProps) {
             <CodeBlock code={SERVER} filename="Terminal" language="bash" copyLabel={copy.copyLabel} copiedLabel={copy.copiedLabel} />
           </div>
           <div className={styles.column}>
-            <p className={styles.note}>{copy.serverNote} <External href={copy.serverDocs.href}>{copy.serverDocs.label}</External></p>
+            <p className={styles.note}>{copy.serverNote} <a className={styles.link} href={copy.serverDocs.href}>{copy.serverDocs.label}</a></p>
           </div>
         </div>
       </TabsContent>

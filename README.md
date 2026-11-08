@@ -1,6 +1,6 @@
 # OpenBee website
 
-The marketing site for [OpenBee](https://github.com/theopenbee/openbee), built with [Astro](https://astro.build) and the [Arc](https://uiarc.dev) design system. English lives at `/` and Chinese at `/zh/`.
+The marketing site and docs for [OpenBee](https://github.com/theopenbee/openbee), built with [Astro](https://astro.build), [Starlight](https://starlight.astro.build) and the [Arc](https://uiarc.dev) design system. English lives at `/` and `/docs/`, Chinese at `/zh/` and `/zh/docs/`.
 
 ## Develop
 
@@ -18,6 +18,8 @@ Node.js 22.23 or later is required.
 - `src/i18n/content.ts` holds every visible string for both languages. Edit copy there.
 - `src/components/site/` composes the page. Arc blocks are React islands; `Features` and `HowItWorks` are static Astro.
 - `src/components/arc/` is installed Arc source. Add more with `pnpm arc:add <id>`, which wraps the shadcn CLI and strips comments.
+- `src/content/docs/docs/` holds the English docs and `src/content/docs/zh/docs/` the Chinese ones, as Markdown. A page missing in Chinese falls back to English. The sidebar is set in `astro.config.mjs`.
+- `src/components/docs/` overrides Starlight's header, theme and language switch, and `src/styles/docs.css` maps Starlight onto the Arc tokens.
 - `src/lib/release.ts` reads the latest GitHub release at build time to link each desktop installer. If the API call fails, the links fall back to the releases page. Set `GITHUB_TOKEN` to avoid the anonymous rate limit in CI.
 - Rebuild after each OpenBee release so the download links and version stay current.
 

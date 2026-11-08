@@ -1,0 +1,150 @@
+---
+import Search from "@astrojs/starlight/components/Search.astro";
+import LanguageLink from "./LanguageLink.astro";
+import { REPO_URL, content, localePath } from "@/i18n/content";
+
+const locale = Astro.locals.starlightRoute.locale === "zh" ? "zh" : "en";
+const { nav } = content[locale];
+---
+
+<div class="docs-header">
+  <a class="brand" href={localePath(locale)}>
+    <img src="/logo-mark.svg" alt="" width="28" height="28" />
+    <span>OpenBee</span>
+  </a>
+  <nav class="nav" aria-label={nav.label}>
+    <a class="nav-item" href={localePath(locale, "docs/")} aria-current="true">{nav.docs}</a>
+    <a class="nav-item" href={REPO_URL}>GitHub</a>
+  </nav>
+  <div class="search"><Search /></div>
+  <div class="actions">
+    <LanguageLink />
+    <a class="download" href={localePath(locale, "#get-started")}>{nav.download}</a>
+  </div>
+</div>
+
+<style>
+  .docs-header {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .brand {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--foreground);
+    font-size: var(--text-base);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .brand img {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav {
+    display: none;
+    align-items: center;
+    gap: 2px;
+    margin-left: var(--space-4);
+  }
+
+  .nav-item {
+    position: relative;
+    display: inline-flex;
+    height: 36px;
+    align-items: center;
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-control);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .nav-item:hover,
+  .nav-item[aria-current] {
+    color: var(--foreground);
+  }
+
+  .nav-item[aria-current]::after {
+    content: "";
+    position: absolute;
+    right: var(--space-3);
+    bottom: calc((var(--sl-nav-height) - 36px) / -2);
+    left: var(--space-3);
+    height: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--foreground);
+  }
+
+  .search {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    min-width: 0;
+  }
+
+  .actions {
+    display: none;
+    flex: none;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .actions :global(.docs-language) {
+    display: inline-flex;
+    height: 36px;
+    align-items: center;
+    padding: 0 14px;
+    border-radius: var(--radius-control);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .actions :global(.docs-language:hover) {
+    background: var(--surface-muted);
+    color: var(--foreground);
+  }
+
+  .download {
+    display: inline-flex;
+    height: 36px;
+    align-items: center;
+    padding: 0 14px;
+    border-radius: var(--radius-control);
+    background: var(--foreground);
+    color: var(--background);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+
+  .download:hover {
+    opacity: 0.9;
+  }
+
+  @media (min-width: 50rem) {
+    .nav,
+    .actions {
+      display: flex;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-item,
+    .download {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+title: 介绍
+description: OpenBee 把 Claude Code、Codex 或 pi 变成一支 7×24 小时在线的数字员工团队，在桌面应用、浏览器或聊天软件里派活。
+---
+
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+
+OpenBee 把你已经在用的 Agent CLI（Claude Code、Codex 或 pi）变成一支 7×24 小时在线的数字员工团队。在桌面应用、浏览器或聊天软件里给协调者 Bee 发消息，它会把活派给合适的员工。
+
+## 工作方式
+
+- **Bee** 是你对话的协调者。它把活交给引擎、目录和规则都匹配的员工，没有合适的就新建一个。
+- **员工**是一个 Agent CLI，有自己的引擎、工作目录和规则。多个员工可以并行干活。
+- **任务**是交给一个员工的一件活，可以立即执行、延时执行，或按 cron 周期执行。
+
+在聊天软件里，结果回到同一个对话；在桌面应用和浏览器里，每个任务都有自己的员工对话，从 Bee 的交接卡片点开。
+
+## 准备工作
+
+一个 Agent CLI（Claude Code、Codex 或 pi），已安装并登录。OpenBee 驱动它干活，本身不带模型。员工、任务和对话都保存在运行 OpenBee 那台机器的 `~/.openbee` 里。
+
+## 安装
+
+<CardGrid>
+  <LinkCard title="桌面版" description="适合自己的电脑。内置服务端，装这一个就够了。" href="/zh/docs/desktop/" />
+  <LinkCard title="服务端与命令行" description="适合常开的机器。通过浏览器、聊天软件或桌面客户端访问。" href="/zh/docs/server/" />
+</CardGrid>
+
+## 然后，和 Bee 说话
+
+> 帮我建一个员工，叫 Maya，负责后端修复，工作目录是 ~/code/api。
+
+Bee 会创建这个员工。派任务也是一样，直接说。想在飞书、Telegram 等应用里聊天，装一个[渠道插件](/zh/docs/plugins/)。

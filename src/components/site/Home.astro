@@ -49,7 +49,7 @@ const year = new Date().getFullYear();
     <div id="faq" class="anchor">
       <Faq client:visible faq={copy.faq} />
     </div>
-    <Cta client:visible cta={copy.cta} downloadHref={downloadHref} />
+    <Cta client:visible locale={locale} cta={copy.cta} downloadHref={downloadHref} />
   </main>
   <Footer locale={locale} footer={copy.footer} year={year} />
 </Base>

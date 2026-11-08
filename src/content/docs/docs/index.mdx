@@ -1,0 +1,33 @@
+---
+title: Introduction
+description: OpenBee turns Claude Code, Codex or pi into a team of always-on workers you message from the desktop app, the browser or your chat app.
+---
+
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+
+OpenBee turns the agent CLI you already use (Claude Code, Codex or pi) into a team of always-on workers. Message Bee, the coordinator, from the desktop app, the browser or your chat app, and Bee hands the job to the right worker.
+
+## How it works
+
+- **Bee** is the coordinator you talk to. It hands each job to the worker whose engine, folder and rules fit, or creates a new one.
+- A **worker** is an agent CLI with its own engine, working folder and rules. Several workers run side by side.
+- A **task** is one job for one worker. It runs now, after a delay, or on a cron schedule.
+
+In a chat app, the result comes back to the same chat. In the desktop app and the browser, each task gets its own worker chat, opened from Bee's handoff card.
+
+## What you need
+
+One agent CLI (Claude Code, Codex or pi), installed and signed in. OpenBee drives it and ships no model of its own. Workers, tasks and chats stay in `~/.openbee` on the machine that runs OpenBee.
+
+## Install
+
+<CardGrid>
+  <LinkCard title="Desktop app" description="For your own computer. The server is built in, so this is all you install." href="/docs/desktop/" />
+  <LinkCard title="Server and CLI" description="For an always-on machine. Reach it from the browser, a chat app or the desktop client." href="/docs/server/" />
+</CardGrid>
+
+## Then talk to Bee
+
+> Create a worker named Maya for backend fixes, working in ~/code/api.
+
+Bee creates the worker. Hand it a task the same way. To chat from Lark, Telegram or another app, add a [channel plugin](/docs/plugins/).

@@ -10,7 +10,7 @@ Use `var(--radius-control)`, `var(--radius-panel)`, `var(--radius-surface)`, `va
 
 ## Copy
 
-Follow Arc copy rules: sentence case, no eyebrow labels, no em dashes, buttons are verbs with an object, honest claims only. Every visible string lives in `src/i18n/content.ts`, in English and Chinese.
+Follow Arc copy rules: sentence case, no eyebrow labels, no em dashes, buttons are verbs with an object, honest claims only. Every visible string lives in `src/i18n/content.ts`, in English and Chinese. Docs pages are Markdown in `src/content/docs/`, English under `docs/` and Chinese under `zh/docs/`.
 
 ## Code style
 

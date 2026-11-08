@@ -1,0 +1,10 @@
+---
+import { content } from "@/i18n/content";
+
+const zh = Astro.locals.starlightRoute.locale === "zh";
+const path = Astro.url.pathname;
+const href = zh ? path.replace(/^\/zh(?=\/)/, "") : `/zh${path}`;
+const label = content[zh ? "zh" : "en"].nav.switchLocale.label;
+---
+
+<a class="docs-language" href={href} lang={zh ? "en" : "zh-CN"} hreflang={zh ? "en" : "zh-CN"}>{label}</a>

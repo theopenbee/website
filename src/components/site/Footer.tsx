@@ -1,5 +1,5 @@
 import { SiteFooter } from "@/components/arc/blocks/site-footer/site-footer";
-import { DOCS_URL, ISSUES_URL, RELEASES_URL, REPO_URL, X_URL, localePath } from "@/i18n/content";
+import { ISSUES_URL, RELEASES_URL, REPO_URL, X_URL, docsPath, localePath } from "@/i18n/content";
 import type { Locale, SiteContent } from "@/i18n/content";
 import styles from "./Footer.module.css";
 
@@ -12,7 +12,6 @@ interface FooterProps {
 const blob = (path: string) => `${REPO_URL}/blob/main/${path}`;
 
 export function Footer({ locale, footer, year }: FooterProps) {
-  const zh = locale === "zh";
   return <SiteFooter
     variant="columns"
     className={styles.footer}
@@ -21,13 +20,13 @@ export function Footer({ locale, footer, year }: FooterProps) {
     columns={[
       { title: footer.product, links: [
         { label: footer.download, href: RELEASES_URL, external: true },
-        { label: footer.docs, href: DOCS_URL, external: true },
-        { label: footer.plugins, href: blob(zh ? "docs/plugins.zh.md" : "docs/plugins.md"), external: true },
+        { label: footer.docs, href: docsPath(locale) },
+        { label: footer.plugins, href: docsPath(locale, "plugins") },
         { label: footer.changelog, href: blob("CHANGELOG.md"), external: true },
       ] },
       { title: footer.developers, links: [
-        { label: footer.channelProtocol, href: blob("docs/channel-plugin-protocol.md"), external: true },
-        { label: footer.engineProtocol, href: blob("docs/engine-plugin-protocol.md"), external: true },
+        { label: footer.channelProtocol, href: docsPath(locale, "channel-plugin-protocol") },
+        { label: footer.engineProtocol, href: docsPath(locale, "engine-plugin-protocol") },
         { label: footer.contributing, href: blob("CONTRIBUTING.md"), external: true },
         { label: footer.issues, href: ISSUES_URL, external: true },
       ] },
