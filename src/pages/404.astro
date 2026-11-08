@@ -1,0 +1,85 @@
+---
+import Footer from "@/components/site/Footer";
+import Header from "@/components/site/Header";
+import { content, localePath } from "@/i18n/content";
+import Base from "@/layouts/Base.astro";
+
+const copy = content.en;
+const zh = content.zh;
+const year = new Date().getFullYear();
+---
+
+<Base locale="en" noindex copy={{ ...copy, meta: { ...copy.meta, title: `${copy.notFound.title} | OpenBee` } }}>
+  <Header client:load locale="en" nav={copy.nav} />
+  <main id="main" class="section not-found">
+    <h1 class="section-title">{copy.notFound.title}</h1>
+    <p class="section-description">{copy.notFound.description}</p>
+    <div class="actions">
+      <a class="action primary" href={localePath("en")}>{copy.notFound.home}</a>
+      <a class="action secondary" href={localePath("zh")} lang="zh-CN">{zh.notFound.home}</a>
+    </div>
+  </main>
+  <Footer locale="en" footer={copy.footer} year={year} />
+</Base>
+
+<style>
+  .not-found {
+    min-height: 60svh;
+    align-content: center;
+    justify-items: center;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .not-found .section-description {
+    max-width: 34rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .action {
+    display: inline-flex;
+    height: var(--control-height-md);
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-control);
+    padding: 0 var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .primary {
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  .secondary {
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--foreground);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .primary:hover {
+      opacity: .9;
+    }
+
+    .secondary:hover {
+      background: var(--surface-muted);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action {
+      transition: none;
+    }
+  }
+</style>

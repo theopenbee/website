@@ -96,6 +96,7 @@ export interface SiteContent {
     contact: { label: string; description: string };
   };
   cta: { title: string; description: string; primary: string; secondary: string; note: string };
+  notFound: { title: string; description: string; home: string };
   footer: {
     tagline: string;
     product: string;
@@ -231,6 +232,11 @@ const en: SiteContent = {
     secondary: "Read the docs",
     note: "Free and open source under AGPL-3.0",
   },
+  notFound: {
+    title: "Page not found",
+    description: "This page moved or never existed. The home page has everything about OpenBee.",
+    home: "Go to the home page",
+  },
   footer: {
     tagline: "Build smarter AI teams.",
     product: "Product",
@@ -365,6 +371,11 @@ const zh: SiteContent = {
     primary: "下载 OpenBee",
     secondary: "阅读文档",
     note: "基于 AGPL-3.0 免费开源",
+  },
+  notFound: {
+    title: "页面不存在",
+    description: "这个页面已经移走或从未存在，首页有 OpenBee 的全部介绍。",
+    home: "返回首页",
   },
   footer: {
     tagline: "打造更聪明的 AI 团队。",
