@@ -17,7 +17,7 @@ interface Props {
 const { locale, copy, noindex = false } = Astro.props;
 const canonical = new URL(localePath(locale), Astro.site);
 const alternates = (["en", "zh"] as const).map(code => ({ code, href: new URL(localePath(code), Astro.site).href }));
-const ogImage = new URL("/og.png", Astro.site);
+const ogImage = new URL("/og.png?v=2", Astro.site);
 ---
 
 <!doctype html>
