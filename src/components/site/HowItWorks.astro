@@ -35,14 +35,14 @@ const initials = sample.worker.includes(" ") ? sample.worker.split(" ").map(part
       <p class="bubble">{sample.request}</p>
     </div>
     <div class="row">
-      <img class="avatar bee" src="/logo-mark.svg" alt="" width="32" height="32" />
+      <span class="avatar bee"><img src="/logo-mark.svg" alt="" width="24" height="24" /></span>
       <div class="body">
         <span class="name">{sample.bee}</span>
         <p class="bubble">{sample.reply}</p>
       </div>
     </div>
     <div class="row">
-      <img class="avatar bee" src="/logo-mark.svg" alt="" width="32" height="32" />
+      <span class="avatar bee"><img src="/logo-mark.svg" alt="" width="24" height="24" /></span>
       <div class="body">
         <span class="name">{sample.bee}</span>
         <div class="handoff">
@@ -201,9 +201,15 @@ const initials = sample.worker.includes(" ") ? sample.worker.split(" ").map(part
   }
 
   .bee {
-    padding: 3px;
+    padding: 4px;
     background: var(--surface);
     box-shadow: inset 0 0 0 1px var(--border);
+  }
+
+  .bee img {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .worker {
