@@ -18,9 +18,9 @@
   :is(.action, .announcement):hover .arrow { transform: translateX(2px); }
 }
 
-.install { display: flex; width: fit-content; max-width: 100%; height: var(--control-height-md); align-items: center; gap: var(--space-2); margin-top: var(--space-2); border: 1px solid var(--border); border-radius: var(--radius-control); padding: 0 var(--space-1) 0 var(--space-4); background: var(--surface); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; text-align: left; }
-.prompt { color: var(--text-muted); }
-.command { flex: 1; overflow: hidden; color: var(--foreground); font: inherit; text-overflow: ellipsis; white-space: nowrap; }
+.install { display: flex; width: fit-content; max-width: 100%; height: var(--control-height-md); align-items: center; gap: var(--space-2); margin-top: var(--space-2); border: 1px solid var(--border); border-radius: var(--radius-control); padding: 0 var(--space-1) 0 var(--space-4); background: var(--surface); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; text-align: left; will-change: transform; }
+.prompt { color: var(--text-muted); text-box: trim-both ex alphabetic; }
+.command { flex: 1; overflow: hidden; padding-block: .5em; color: var(--foreground); font: inherit; text-box: trim-both ex alphabetic; text-overflow: ellipsis; white-space: nowrap; }
 
 .meta { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: var(--space-4) 0 0; border-top: 1px solid var(--border-subtle); padding: var(--space-5) 0 0; color: var(--text-muted); font-size: var(--text-sm); list-style: none; }
 
