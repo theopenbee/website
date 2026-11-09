@@ -53,7 +53,7 @@ function initialChats(copy: HeroDemoCopy): Chats {
 
 function BeeAvatar({ size = "md" }: { size?: "sm" | "md" }) {
   return <span className={[styles.avatar, styles.bee, styles[size]].join(" ")} aria-hidden="true">
-    <img src="/logo-mark.svg" alt="" width="24" height="24" />
+    <img src={size === "sm" ? "/logo-mark-small.svg" : "/logo-mark.svg"} alt="" width="24" height="24" />
   </span>;
 }
 
