@@ -22,6 +22,50 @@ interface Step {
   text: string;
 }
 
+export type DemoTone = "sky" | "orchid" | "violet" | "rose" | "amber" | "teal" | "green";
+
+export interface DemoMessage {
+  from: "you" | "bee" | "worker";
+  time: string;
+  text?: string;
+  handoff?: { worker: string; task: string; cron?: string };
+}
+
+export interface DemoWorker {
+  id: string;
+  name: string;
+  tone: DemoTone;
+  status: "working" | "idle";
+  engine: string;
+  description: string;
+  unread: number;
+  yesterday?: boolean;
+  messages: DemoMessage[];
+}
+
+export interface HeroDemo {
+  label: string;
+  search: string;
+  noResults: string;
+  beeName: string;
+  idle: string;
+  working: string;
+  placeholder: string;
+  hint: string;
+  send: string;
+  back: string;
+  handedOffTo: string;
+  recurring: string;
+  yesterday: string;
+  unread: string;
+  account: string;
+  beeReply: string;
+  workerReply: string;
+  handoffWorker: string;
+  bee: DemoMessage[];
+  workers: DemoWorker[];
+}
+
 export interface SiteContent {
   lang: string;
   meta: { title: string; description: string };
@@ -43,7 +87,7 @@ export interface SiteContent {
     secondary: string;
     installLabel: string;
     meta: string[];
-    screenshotAlt: string;
+    demo: HeroDemo;
   };
   integrations: { title: string; labels: { pause: string; play: string; paused: string } };
   features: { title: string; description: string; items: Feature[] };
@@ -139,7 +183,91 @@ const en: SiteContent = {
     secondary: "View on GitHub",
     installLabel: "Install with Homebrew",
     meta: ["macOS, Windows and Linux", "Open source under AGPL-3.0", "Your data stays on your machine"],
-    screenshotAlt: "Bee splits a release across three workers in the OpenBee desktop app",
+    demo: {
+      label: "OpenBee demo with sample data",
+      search: "Search",
+      noResults: "No workers found",
+      beeName: "Bee",
+      idle: "Idle",
+      working: "Working",
+      placeholder: "Message {name}",
+      hint: "Enter to send, Shift+Enter for a new line",
+      send: "Send",
+      back: "Back",
+      handedOffTo: "Handed off to {name}",
+      recurring: "Recurring",
+      yesterday: "Yesterday",
+      unread: "{count} unread",
+      account: "admin",
+      beeReply: "On it. {name} has it.",
+      workerReply: "Got it. I'm on it and will reply here when it's done.",
+      handoffWorker: "maya",
+      bee: [
+        { from: "you", time: "19:31", text: "Ship v0.4 by Friday: fix the login redirect bug, update the install guide for the desktop app, and send me a progress summary every evening." },
+        { from: "bee", time: "19:32", text: "On it. I split the work across three workers." },
+        { from: "bee", time: "19:32", handoff: { worker: "maya", task: "Fix the login redirect bug and add a regression test" } },
+        { from: "bee", time: "19:32", handoff: { worker: "leo", task: "Update the install guide for the new desktop app" } },
+        { from: "bee", time: "19:32", handoff: { worker: "iris", task: "Post a v0.4 progress summary every evening", cron: "0 18 * * *" } },
+      ],
+      workers: [
+        { id: "maya", name: "Maya Lin", tone: "sky", status: "working", engine: "Claude Code", description: "API and backend fixes", unread: 1, messages: [
+          { from: "bee", time: "19:32", text: "Fix the login redirect bug and add a regression test" },
+          { from: "worker", time: "19:44", text: "Fixed: the redirect keeps the return URL now. Regression test added, PR #212 is green." },
+        ] },
+        { id: "leo", name: "Leo Park", tone: "orchid", status: "working", engine: "Codex", description: "Docs and install guides", unread: 0, messages: [
+          { from: "bee", time: "19:32", text: "Update the install guide for the new desktop app" },
+          { from: "worker", time: "19:40", text: "Rewriting the install section for the desktop app. Screenshots are next." },
+        ] },
+        { id: "iris", name: "Iris Wang", tone: "violet", status: "idle", engine: "pi", description: "Daily reports and summaries", unread: 0, messages: [
+          { from: "bee", time: "19:32", text: "Post a v0.4 progress summary every evening" },
+        ] },
+        { id: "kai", name: "Kai Zhou", tone: "rose", status: "idle", engine: "Claude Code", description: "Code review", unread: 0, messages: [
+          { from: "you", time: "16:30", text: "Review PR #208 when you get a chance." },
+          { from: "worker", time: "16:46", text: "Left 3 comments on #208, nothing blocking." },
+        ] },
+        { id: "theo", name: "Theo Chen", tone: "amber", status: "working", engine: "Codex", description: "Builds and releases", unread: 0, messages: [
+          { from: "you", time: "16:05", text: "Cut a v0.4 release candidate." },
+          { from: "worker", time: "16:12", text: "Building v0.4 for macOS, Windows and Linux. I'll post the checksums when it's done." },
+        ] },
+        { id: "ruby", name: "Ruby Shen", tone: "sky", status: "idle", engine: "Claude Code", description: "Frontend and UI", unread: 2, messages: [
+          { from: "you", time: "14:50", text: "The worker list looks broken when there are no workers. Can you design an empty state?" },
+          { from: "worker", time: "15:28", text: "Pushed it to ui/empty-state. Screenshots are in the PR description." },
+          { from: "worker", time: "15:30", text: "New empty state for the worker list is ready for review." },
+        ] },
+        { id: "finn", name: "Finn Jiang", tone: "teal", status: "idle", engine: "Codex", description: "Database and migrations", unread: 0, messages: [
+          { from: "you", time: "14:20", text: "Test migration v61 before we ship." },
+          { from: "worker", time: "14:58", text: "Migration v61 tested against a copy of production data. No issues." },
+        ] },
+        { id: "ava", name: "Ava Sun", tone: "sky", status: "working", engine: "pi", description: "QA and testing", unread: 0, messages: [
+          { from: "bee", time: "13:15", text: "Run the smoke suite on every platform before the release." },
+          { from: "worker", time: "13:21", text: "Running the smoke suite on Windows arm64. macOS and Linux passed." },
+        ] },
+        { id: "owen", name: "Owen Liu", tone: "teal", status: "idle", engine: "Claude Code", description: "CI and infrastructure", unread: 0, messages: [
+          { from: "you", time: "10:30", text: "CI is getting slow. Can you look at caching?" },
+          { from: "worker", time: "11:07", text: "CI cache cut build time from 9 to 4 minutes." },
+        ] },
+        { id: "mia", name: "Mia Tang", tone: "violet", status: "idle", engine: "Codex", description: "Blog and launch posts", unread: 1, messages: [
+          { from: "you", time: "09:40", text: "Write the v0.4 launch post." },
+          { from: "worker", time: "10:02", text: "Draft for the v0.4 launch post is in docs/blog/v0.4.md." },
+        ] },
+        { id: "ethan", name: "Ethan Wu", tone: "green", status: "idle", engine: "pi", description: "Security and dependencies", unread: 0, messages: [
+          { from: "bee", time: "09:00", text: "Check our dependencies for new security advisories." },
+          { from: "worker", time: "09:15", text: "No new advisories for our dependencies this week." },
+        ] },
+        { id: "zoe", name: "Zoe He", tone: "amber", status: "idle", engine: "Claude Code", description: "Translation", unread: 0, messages: [
+          { from: "you", time: "08:10", text: "Translate the new settings strings into Chinese." },
+          { from: "worker", time: "08:40", text: "Chinese strings for settings are translated and merged." },
+        ] },
+        { id: "nora", name: "Nora Xu", tone: "green", status: "idle", engine: "pi", description: "Customer support", unread: 1, yesterday: true, messages: [
+          { from: "bee", time: "17:00", text: "Go through today's support inbox." },
+          { from: "worker", time: "18:20", text: "Answered 12 tickets, 2 need your call." },
+        ] },
+        { id: "lucas", name: "Lucas Gao", tone: "orchid", status: "idle", engine: "Codex", description: "Product analytics", unread: 0, yesterday: true, messages: [
+          { from: "you", time: "17:30", text: "How did signups do this week?" },
+          { from: "worker", time: "18:05", text: "Weekly active users up 8% week over week, signups up 12%." },
+        ] },
+      ],
+    },
   },
   integrations: {
     title: "Works with your agent CLI and chat apps",
@@ -279,7 +407,91 @@ const zh: SiteContent = {
     secondary: "在 GitHub 上查看",
     installLabel: "用 Homebrew 安装",
     meta: ["支持 macOS、Windows 和 Linux", "AGPL-3.0 开源", "数据留在你自己的机器上"],
-    screenshotAlt: "在 OpenBee 桌面版中，Bee 把一次发版拆给三名员工",
+    demo: {
+      label: "OpenBee 演示（示例数据）",
+      search: "搜索",
+      noResults: "没有找到员工",
+      beeName: "Bee",
+      idle: "空闲",
+      working: "处理中",
+      placeholder: "给 {name} 发消息",
+      hint: "回车发送，Shift+Enter 换行",
+      send: "发送",
+      back: "返回",
+      handedOffTo: "已交给 {name}",
+      recurring: "周期任务",
+      yesterday: "昨天",
+      unread: "{count} 条未读",
+      account: "admin",
+      beeReply: "收到，交给{name}了。",
+      workerReply: "收到，马上开始，做完在这里回复你。",
+      handoffWorker: "maya",
+      bee: [
+        { from: "you", time: "19:31", text: "周五前发布 v0.4：修复登录跳转的 bug，更新桌面版的安装指南，每天晚上给我发一份进度汇总。" },
+        { from: "bee", time: "19:32", text: "收到，我把活分给了三名员工。" },
+        { from: "bee", time: "19:32", handoff: { worker: "maya", task: "修复登录跳转的 bug，并补一个回归测试" } },
+        { from: "bee", time: "19:32", handoff: { worker: "leo", task: "更新新版桌面应用的安装指南" } },
+        { from: "bee", time: "19:32", handoff: { worker: "iris", task: "每天晚上发一份 v0.4 进度汇总", cron: "0 18 * * *" } },
+      ],
+      workers: [
+        { id: "maya", name: "林知夏", tone: "sky", status: "working", engine: "Claude Code", description: "接口和后端修复", unread: 1, messages: [
+          { from: "bee", time: "19:32", text: "修复登录跳转的 bug，并补一个回归测试" },
+          { from: "worker", time: "19:44", text: "已修复：跳转现在会保留返回地址。回归测试已补上，PR #212 全绿。" },
+        ] },
+        { id: "leo", name: "顾北辰", tone: "orchid", status: "working", engine: "Codex", description: "文档和安装指南", unread: 0, messages: [
+          { from: "bee", time: "19:32", text: "更新新版桌面应用的安装指南" },
+          { from: "worker", time: "19:40", text: "正在重写桌面应用的安装章节，接下来补截图。" },
+        ] },
+        { id: "iris", name: "苏晴", tone: "violet", status: "idle", engine: "pi", description: "日报和进度汇总", unread: 0, messages: [
+          { from: "bee", time: "19:32", text: "每天晚上发一份 v0.4 进度汇总" },
+        ] },
+        { id: "kai", name: "周砚", tone: "rose", status: "idle", engine: "Claude Code", description: "代码评审", unread: 0, messages: [
+          { from: "you", time: "16:30", text: "有空看一下 PR #208。" },
+          { from: "worker", time: "16:46", text: "在 #208 留了 3 条评论，都不影响合并。" },
+        ] },
+        { id: "theo", name: "陈默", tone: "amber", status: "working", engine: "Codex", description: "构建和发布", unread: 0, messages: [
+          { from: "you", time: "16:05", text: "打一个 v0.4 的候选版本。" },
+          { from: "worker", time: "16:12", text: "正在为 macOS、Windows 和 Linux 构建 v0.4，完成后贴上校验和。" },
+        ] },
+        { id: "ruby", name: "沈墨白", tone: "sky", status: "idle", engine: "Claude Code", description: "前端和界面", unread: 2, messages: [
+          { from: "you", time: "14:50", text: "没有员工的时候列表看着像坏了，能做一个空状态吗？" },
+          { from: "worker", time: "15:28", text: "已推到 ui/empty-state 分支，截图在 PR 描述里。" },
+          { from: "worker", time: "15:30", text: "员工列表的新空状态做好了，等你评审。" },
+        ] },
+        { id: "finn", name: "江小渔", tone: "teal", status: "idle", engine: "Codex", description: "数据库和迁移", unread: 0, messages: [
+          { from: "you", time: "14:20", text: "发布前测一下 v61 迁移。" },
+          { from: "worker", time: "14:58", text: "v61 迁移已在生产数据副本上测过，没有问题。" },
+        ] },
+        { id: "ava", name: "孙晓雅", tone: "sky", status: "working", engine: "pi", description: "测试和质量", unread: 0, messages: [
+          { from: "bee", time: "13:15", text: "发布前在所有平台上跑一遍冒烟测试。" },
+          { from: "worker", time: "13:21", text: "正在 Windows arm64 上跑冒烟测试，macOS 和 Linux 已通过。" },
+        ] },
+        { id: "owen", name: "刘一鸣", tone: "teal", status: "idle", engine: "Claude Code", description: "CI 和基础设施", unread: 0, messages: [
+          { from: "you", time: "10:30", text: "CI 越来越慢了，看看能不能加缓存？" },
+          { from: "worker", time: "11:07", text: "加上 CI 缓存后，构建时间从 9 分钟降到 4 分钟。" },
+        ] },
+        { id: "mia", name: "唐沐", tone: "violet", status: "idle", engine: "Codex", description: "博客和发布文案", unread: 1, messages: [
+          { from: "you", time: "09:40", text: "写一篇 v0.4 的发布文章。" },
+          { from: "worker", time: "10:02", text: "v0.4 发布文章的初稿放在 docs/blog/v0.4.md。" },
+        ] },
+        { id: "ethan", name: "吴以恒", tone: "green", status: "idle", engine: "pi", description: "安全和依赖", unread: 0, messages: [
+          { from: "bee", time: "09:00", text: "检查一下依赖有没有新的安全公告。" },
+          { from: "worker", time: "09:15", text: "本周依赖没有新的安全公告。" },
+        ] },
+        { id: "zoe", name: "何悠然", tone: "amber", status: "idle", engine: "Claude Code", description: "翻译", unread: 0, messages: [
+          { from: "you", time: "08:10", text: "把新的设置项文案翻译成中文。" },
+          { from: "worker", time: "08:40", text: "设置项的中文文案已翻译并合并。" },
+        ] },
+        { id: "nora", name: "许安然", tone: "green", status: "idle", engine: "pi", description: "客服", unread: 1, yesterday: true, messages: [
+          { from: "bee", time: "17:00", text: "处理一下今天的客服邮件。" },
+          { from: "worker", time: "18:20", text: "回复了 12 个工单，有 2 个需要你来定。" },
+        ] },
+        { id: "lucas", name: "高远", tone: "orchid", status: "idle", engine: "Codex", description: "产品数据分析", unread: 0, yesterday: true, messages: [
+          { from: "you", time: "17:30", text: "这周注册情况怎么样？" },
+          { from: "worker", time: "18:05", text: "周活跃用户环比上涨 8%，注册量上涨 12%。" },
+        ] },
+      ],
+    },
   },
   integrations: {
     title: "接入你的 Agent CLI 和聊天软件",

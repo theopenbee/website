@@ -1,6 +1,4 @@
 ---
-import { Picture } from "astro:assets";
-import screenshot from "@/assets/openbee-desktop.png";
 import { content, localePath } from "@/i18n/content";
 import type { Locale } from "@/i18n/content";
 import { getLatestRelease } from "@/lib/release";
@@ -29,17 +27,7 @@ const year = new Date().getFullYear();
 <Base locale={locale} copy={copy}>
   <Header client:load locale={locale} nav={copy.nav} />
   <main id="main">
-    <Hero client:load hero={copy.hero} downloadHref={downloadHref}>
-      <Picture
-        src={screenshot}
-        alt={copy.hero.screenshotAlt}
-        formats={["avif", "webp"]}
-        widths={[720, 1200, 1800, 2400]}
-        sizes="(max-width: 1240px) calc(100vw - 32px), 1120px"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </Hero>
+    <Hero client:load hero={copy.hero} downloadHref={downloadHref} />
     <div class="integrations">
       <Integrations client:visible integrations={copy.integrations} />
     </div>

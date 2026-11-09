@@ -1,16 +1,15 @@
-import type { ReactNode } from "react";
 import { HeroContent } from "@/components/arc/blocks/hero-section/hero-content";
 import { REPO_URL } from "@/i18n/content";
 import type { SiteContent } from "@/i18n/content";
+import { HeroDemo } from "./HeroDemo";
 import styles from "./Hero.module.css";
 
 interface HeroProps {
   hero: SiteContent["hero"];
   downloadHref: string;
-  children?: ReactNode;
 }
 
-export function Hero({ hero, downloadHref, children }: HeroProps) {
+export function Hero({ hero, downloadHref }: HeroProps) {
   return <HeroContent
     layout="centered"
     className={styles.hero}
@@ -20,7 +19,7 @@ export function Hero({ hero, downloadHref, children }: HeroProps) {
     secondaryAction={{ label: hero.secondary, href: REPO_URL, external: true }}
     install={[{ label: hero.installLabel, command: "npm install -g @theopenbee/cli" }]}
     meta={hero.meta}
-    media={<div className={styles.frame}>{children}</div>}
+    media={<div className={styles.frame}><HeroDemo copy={hero.demo} /></div>}
   />;
 }
 
