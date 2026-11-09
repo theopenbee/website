@@ -134,7 +134,7 @@ const en: SiteContent = {
   },
   hero: {
     title: "Build smarter AI teams",
-    description: "OpenBee turns the agent CLI you already use into a team of always-on workers. Message Bee, and it hands the job to the right worker. Results come back to your chat app, or to the worker's own chat in the desktop app and browser.",
+    description: "OpenBee turns the agent CLI you already use into a team of always-on workers.",
     primary: "Download OpenBee",
     secondary: "View on GitHub",
     installLabel: "Install with Homebrew",
@@ -274,7 +274,7 @@ const zh: SiteContent = {
   },
   hero: {
     title: "打造更聪明的 AI 团队",
-    description: "OpenBee 把你已经在用的 Agent CLI 变成一支 7×24 小时在线的数字员工团队。给 Bee 发消息，它会把活派给合适的员工。结果回到你的聊天软件；在桌面应用和浏览器里，则回到员工自己的对话。",
+    description: "OpenBee 把你已经在用的 Agent CLI 变成一支 7×24 小时在线的数字员工团队。",
     primary: "下载 OpenBee",
     secondary: "在 GitHub 上查看",
     installLabel: "用 Homebrew 安装",
