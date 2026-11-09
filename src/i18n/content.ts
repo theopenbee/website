@@ -162,7 +162,7 @@ export interface SiteContent {
 const en: SiteContent = {
   lang: "en",
   meta: {
-    title: "OpenBee: build smarter AI teams",
+    title: "OpenBee: build reliable AI teams",
     description: "OpenBee turns Claude Code, Codex or pi into a team of always-on workers you message from the desktop app, the browser or your chat app.",
   },
   skipLink: "Skip to content",
@@ -177,7 +177,7 @@ const en: SiteContent = {
     download: "Download",
   },
   hero: {
-    title: "Build smarter AI teams",
+    title: "Build reliable AI teams",
     description: "OpenBee turns the agent CLI you already use into a team of always-on workers.",
     primary: "Download OpenBee",
     secondary: "View on GitHub",
@@ -366,7 +366,7 @@ const en: SiteContent = {
     home: "Go to the home page",
   },
   footer: {
-    tagline: "Build smarter AI teams.",
+    tagline: "Build reliable AI teams.",
     product: "Product",
     developers: "Developers",
     language: "Language",
@@ -386,7 +386,7 @@ const en: SiteContent = {
 const zh: SiteContent = {
   lang: "zh-CN",
   meta: {
-    title: "OpenBee：打造更聪明的 AI 团队",
+    title: "OpenBee：打造更可靠的 AI 团队",
     description: "OpenBee 把 Claude Code、Codex 或 pi 变成一支 7×24 小时在线的数字员工团队，在桌面应用、浏览器或聊天软件里派活。",
   },
   skipLink: "跳到正文",
@@ -401,7 +401,7 @@ const zh: SiteContent = {
     download: "下载",
   },
   hero: {
-    title: "打造更聪明的 AI 团队",
+    title: "打造更可靠的 AI 团队",
     description: "OpenBee 把你已经在用的 Agent CLI 变成一支 7×24 小时在线的数字员工团队。",
     primary: "下载 OpenBee",
     secondary: "在 GitHub 上查看",
@@ -590,7 +590,7 @@ const zh: SiteContent = {
     home: "返回首页",
   },
   footer: {
-    tagline: "打造更聪明的 AI 团队。",
+    tagline: "打造更可靠的 AI 团队。",
     product: "产品",
     developers: "开发者",
     language: "语言",
