@@ -19,7 +19,7 @@ const BRANDS = [
 ];
 
 export function Integrations({ integrations }: IntegrationsProps) {
-  return <LogoMarquee title={integrations.title} description={integrations.description} brands={BRANDS} tone="mono" labels={integrations.labels} />;
+  return <LogoMarquee title={integrations.title} brands={BRANDS} tone="mono" labels={integrations.labels} />;
 }
 
 export default Integrations;

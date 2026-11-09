@@ -60,7 +60,7 @@ function BrandList({ brands, tone, duplicate = false }: { brands: LogoMarqueeBra
 
 export function LogoMarquee({
   title = "Good work moves between tools",
-  description = "From the first idea to the final handoff, a familiar set of tools stays close to the work.",
+  description,
   brands = exampleBrands,
   tone = "color",
   labels = { pause: "Pause", play: "Play", paused: "Motion paused" },
@@ -72,7 +72,7 @@ export function LogoMarquee({
     <section className={styles.section} data-tone={tone} aria-labelledby={titleId}>
       <div className={styles.intro}>
         <h2 id={titleId}>{title}</h2>
-        <p>{description}</p>
+        {description ? <p>{description}</p> : null}
       </div>
 
       <div className={styles.marquee} role="region" aria-label={title}>

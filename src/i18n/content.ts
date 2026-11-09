@@ -45,7 +45,7 @@ export interface SiteContent {
     meta: string[];
     screenshotAlt: string;
   };
-  integrations: { title: string; description: string; labels: { pause: string; play: string; paused: string } };
+  integrations: { title: string; labels: { pause: string; play: string; paused: string } };
   features: { title: string; description: string; items: Feature[] };
   howItWorks: {
     title: string;
@@ -143,7 +143,6 @@ const en: SiteContent = {
   },
   integrations: {
     title: "Works with your agent CLI and chat apps",
-    description: "OpenBee drives Claude Code, Codex or pi, and reaches you in the apps your team already uses.",
     labels: { pause: "Pause", play: "Play", paused: "Motion paused" },
   },
   features: {
@@ -284,7 +283,6 @@ const zh: SiteContent = {
   },
   integrations: {
     title: "接入你的 Agent CLI 和聊天软件",
-    description: "OpenBee 驱动 Claude Code、Codex 或 pi，并在团队常用的应用里和你对话。",
     labels: { pause: "暂停", play: "播放", paused: "已暂停滚动" },
   },
   features: {
