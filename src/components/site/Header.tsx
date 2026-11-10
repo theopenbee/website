@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/components/arc/blocks/site-header/site-header";
-import { REPO_URL, docsPath, localePath } from "@/i18n/content";
+import { docsPath, localePath } from "@/i18n/content";
 import type { Locale, SiteContent } from "@/i18n/content";
 import styles from "./Header.module.css";
 
@@ -19,7 +19,6 @@ export function Header({ locale, nav }: HeaderProps) {
       { value: "get-started", label: nav.getStarted, href: localePath(locale, "#get-started") },
       { value: "faq", label: nav.faq, href: localePath(locale, "#faq") },
       { value: "docs", label: nav.docs, href: docsPath(locale) },
-      { value: "github", label: "GitHub", href: REPO_URL },
     ]}
     secondaryAction={{ label: nav.switchLocale.label, href: nav.switchLocale.href }}
     primaryAction={{ label: nav.download, href: localePath(locale, "#get-started") }}
