@@ -27,6 +27,7 @@ Do this while the plugin is running, because the console checks the connection.
 
 1. Under **Events & Callbacks**, choose **Receive events through persistent connection**.
 2. Add the event `im.message.receive_v1`.
-3. Publish a version and add the bot to your groups.
+3. On the callback tab, choose the persistent connection too and add the callback `card.action.trigger`. Without it, buttons in the bot's cards show an error when clicked.
+4. Publish a version and add the bot to your groups.
 
 Replies render Markdown. The bot sends files up to 30 MB.
