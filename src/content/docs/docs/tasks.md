@@ -32,6 +32,6 @@ Failures and cancellations are reported in the same place. Failed tasks are not 
 | To | Do |
 | --- | --- |
 | Stop the current work | **Stop** in the worker's chat, or `/stop <worker>` |
-| Cancel a scheduled task | Tell Bee: "Cancel the daily commit summary." |
+| Cancel a scheduled task | `/cancel`, or tell Bee: "Cancel the daily commit summary." In Lark / Feishu, a new scheduled task comes with a **Cancel task** button. |
 | See scheduled tasks | Ask Bee: "Which recurring tasks do I have?" |
 | Start over | **New conversation** or `/clear`. Scheduled tasks are kept. |
