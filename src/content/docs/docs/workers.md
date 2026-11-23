@@ -17,7 +17,7 @@ Or click **+** at the top of the chat list. In the desktop app, ⌘N or Ctrl+N a
 | --- | --- |
 | Name | Required and unique. |
 | AI engine | Required. Starts on the default engine. |
-| Model | Optional. Pick one the engine lists or type a name, such as `opus` or `deepseek/deepseek-flash`. Blank uses the engine's default. |
+| Model | Optional. Pick one the engine lists or type a name, such as `opus` or `deepseek/deepseek-flash`. Blank uses the default model from Settings, or the engine's own default. |
 | Description | What the worker is for. Bee routes jobs by it, so fill it in. |
 | Work constraints | Standing rules, see [Work constraints](/docs/constraints/). |
 | Engine args | Extra CLI flags, such as `--effort high`. |
@@ -46,6 +46,7 @@ A worker without its own engine uses the default engine: Settings → **Default 
 
 - The list comes from the engine. OpenCode and pi only list providers they have a key for, so add the key in **Env** first.
 - Each engine keeps its own model, so switching engines does not carry the model over.
+- Settings → **Models** sets a default model per engine for workers without their own, and the model Bee runs on.
 - If the engine args already set a model (`--model` or `-m`), the engine args win.
 - Needs engine plugins 0.2 or newer. Older ones ignore the field.
 
