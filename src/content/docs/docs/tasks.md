@@ -20,6 +20,21 @@ Recurring tasks follow a cron schedule in the server's time zone and run until y
 
 Failures and cancellations are reported in the same place. Failed tasks are not retried.
 
+## View the process
+
+The desktop app and the web console show each step a worker took: its thinking, the files it read and changed, the commands it ran with their output, and the messages it sent.
+
+| When | Where |
+| --- | --- |
+| Running | **View process** next to "Working" at the bottom of the chat; it updates every 2 seconds |
+| Finished | Hover a worker reply and click **View process** next to its time |
+| Handed off by Bee | The status row at the bottom of the handoff card |
+| Failed or cancelled | **View process** on the notice |
+
+- Needs engine plugins 0.3.0 or later (Claude Code, Codex, pi, OpenCode). Older plugins show a hint to update them in **Settings → Plugins**.
+- Replies sent before you upgraded openbee have no link.
+- Changed files show the changed lines; Codex only shows the file name.
+
 ## Queue and limits
 
 - A worker runs one task at a time. The rest wait in line. Different workers run in parallel.
