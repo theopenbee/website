@@ -9,6 +9,7 @@ const BRANDS = [
   { name: "Claude Code", icon: "/logos/claude-code.svg" },
   { name: "Codex", icon: "/logos/codex.svg" },
   { name: "pi", icon: "/logos/pi.svg" },
+  { name: "OpenCode", icon: "/logos/opencode.svg" },
   { name: "Lark", icon: "/logos/lark.svg" },
   { name: "DingTalk", icon: "/logos/dingtalk.svg" },
   { name: "WeCom", icon: "/logos/wecom.svg" },

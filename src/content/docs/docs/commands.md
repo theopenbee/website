@@ -15,7 +15,7 @@ Commands work in every chat app, the desktop app and the web console. Send the c
 | `/status` | Shows active contexts and running tasks. |
 | `/list [keyword]` | Lists workers. The keyword filters by description. |
 | `/engine` | Shows the default engine. |
-| `/engine <engine>` | Sets the default engine: `claude`, `codex` or `pi`. |
+| `/engine <engine>` | Sets the default engine: `claude`, `codex`, `pi` or `opencode`. |
 | `/engine <engine> <worker>` | Sets one worker's engine. |
 | `/cancel` | Lists this chat's scheduled and countdown tasks. |
 | `/cancel <task ID>` | Cancels one of them. The first 8 characters of the ID are enough. |

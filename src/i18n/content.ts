@@ -163,7 +163,7 @@ const en: SiteContent = {
   lang: "en",
   meta: {
     title: "OpenBee: build reliable AI teams",
-    description: "OpenBee turns Claude Code, Codex or pi into a team of always-on workers you message from the desktop app, the browser or your chat app.",
+    description: "OpenBee turns Claude Code, Codex, pi or OpenCode into a team of always-on workers you message from the desktop app, the browser or your chat app.",
   },
   skipLink: "Skip to content",
   nav: {
@@ -309,7 +309,7 @@ const en: SiteContent = {
   },
   getStarted: {
     title: "Get started",
-    description: "Pick the desktop app for your own computer, or the server for an always-on machine. Either way, you need Claude Code, Codex or pi installed and signed in.",
+    description: "Pick the desktop app for your own computer, or the server for an always-on machine. Either way, you need Claude Code, Codex, pi or OpenCode installed and signed in.",
     tabsLabel: "Install options",
     copyLabel: "Copy code",
     copiedLabel: "Copied",
@@ -324,7 +324,7 @@ const en: SiteContent = {
     desktopNote: "Builds are not code signed yet, so the system asks you to approve the app once.",
     firstLaunch: { label: "First launch", href: "/docs/desktop/#first-launch" },
     serverIntro: "Install the CLI from npm, start the server in the background and add an engine.",
-    serverNote: "Open localhost:19876 and create the admin account. Swap claude for codex or pi.",
+    serverNote: "Open localhost:19876 and create the admin account. Swap claude for codex, pi or opencode.",
     serverDocs: { label: "Other install methods", href: "/docs/server/" },
     talkTitle: "Then talk to Bee",
     talkText: "Bee creates the worker. Hand it a task the same way.",
@@ -342,7 +342,7 @@ const en: SiteContent = {
     title: "Questions and answers",
     description: "Still stuck? Open an issue and we will help.",
     items: [
-      { id: "model", question: "Does OpenBee include an AI model?", answer: "No. OpenBee drives the agent CLI you already use (Claude Code, Codex or pi) with your own sign-in. It ships no model of its own." },
+      { id: "model", question: "Does OpenBee include an AI model?", answer: "No. OpenBee drives the agent CLI you already use (Claude Code, Codex, pi or OpenCode) with your own sign-in. It ships no model of its own." },
       { id: "cost", question: "Is OpenBee free?", answer: "Yes. OpenBee is open source under AGPL-3.0. You pay only for the agent CLI subscription or API usage you already have." },
       { id: "data", question: "Where does my data live?", answer: "On the machine that runs OpenBee. Workers, tasks and chats are stored in ~/.openbee on your computer or server." },
       { id: "edition", question: "Should I install the desktop app or the server?", answer: "Pick the desktop app for your own computer: the server is built in. Pick the server for an always-on machine, then reach it from the browser, a chat app or the client-only desktop build." },
@@ -387,7 +387,7 @@ const zh: SiteContent = {
   lang: "zh-CN",
   meta: {
     title: "OpenBee：打造更可靠的 AI 团队",
-    description: "OpenBee 把 Claude Code、Codex 或 pi 变成一支 7×24 小时在线的数字员工团队，在桌面应用、浏览器或聊天软件里派活。",
+    description: "OpenBee 把 Claude Code、Codex、pi 或 OpenCode 变成一支 7×24 小时在线的数字员工团队，在桌面应用、浏览器或聊天软件里派活。",
   },
   skipLink: "跳到正文",
   nav: {
@@ -533,7 +533,7 @@ const zh: SiteContent = {
   },
   getStarted: {
     title: "快速开始",
-    description: "自己的电脑选桌面版，常开的机器选服务端。两种方式都需要先装好并登录 Claude Code、Codex 或 pi。",
+    description: "自己的电脑选桌面版，常开的机器选服务端。两种方式都需要先装好并登录 Claude Code、Codex、pi 或 OpenCode。",
     tabsLabel: "安装方式",
     copyLabel: "复制",
     copiedLabel: "已复制",
@@ -548,7 +548,7 @@ const zh: SiteContent = {
     desktopNote: "发布包暂未做代码签名，首次打开时系统会要求你手动放行一次。",
     firstLaunch: { label: "首次打开", href: "/zh/docs/desktop/#首次打开" },
     serverIntro: "从 npm 安装命令行，在后台启动服务端，再装一个引擎。",
-    serverNote: "打开 localhost:19876 并创建管理员账号。把 claude 换成 codex 或 pi 即可切换引擎。",
+    serverNote: "打开 localhost:19876 并创建管理员账号。把 claude 换成 codex、pi 或 opencode 即可切换引擎。",
     serverDocs: { label: "其他安装方式", href: "/zh/docs/server/" },
     talkTitle: "然后，和 Bee 说话",
     talkText: "Bee 会创建这个员工。派任务也是一样，直接说。",
@@ -566,7 +566,7 @@ const zh: SiteContent = {
     title: "常见问题",
     description: "没找到答案？在 GitHub 上提个 issue。",
     items: [
-      { id: "model", question: "OpenBee 自带 AI 模型吗？", answer: "不带。OpenBee 驱动你已经在用的 Agent CLI（Claude Code、Codex 或 pi），用的是你自己的登录账号，本身不带模型。" },
+      { id: "model", question: "OpenBee 自带 AI 模型吗？", answer: "不带。OpenBee 驱动你已经在用的 Agent CLI（Claude Code、Codex、pi 或 OpenCode），用的是你自己的登录账号，本身不带模型。" },
       { id: "cost", question: "OpenBee 收费吗？", answer: "免费。OpenBee 基于 AGPL-3.0 开源，你只需为已有的 Agent CLI 订阅或 API 用量付费。" },
       { id: "data", question: "数据存在哪里？", answer: "存在运行 OpenBee 的机器上。员工、任务和对话都保存在你电脑或服务器的 ~/.openbee 里。" },
       { id: "edition", question: "该装桌面版还是服务端？", answer: "自己的电脑选桌面版，它内置了服务端。常开的机器选服务端，再通过浏览器、聊天软件或纯客户端版桌面应用访问。" },
