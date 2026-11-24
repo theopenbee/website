@@ -22,12 +22,12 @@ Failures and cancellations are reported in the same place. Failed tasks are not 
 
 ## View the process
 
-The desktop app and the web console show each step a worker took: its thinking, the files it read and changed, the commands it ran with their output, and the messages it sent.
+The desktop app and the web console show each step a worker or the Bee took: its thinking, the files it read and changed, the commands it ran with their output, and the messages it sent.
 
 | When | Where |
 | --- | --- |
 | Running | **View process** next to "Working" at the bottom of the chat; it updates every 2 seconds |
-| Finished | Hover a worker reply and click **View process** next to its time |
+| Finished | Hover a worker or Bee reply and click **View process** next to its time |
 | Handed off by Bee | The status row at the bottom of the handoff card |
 | Failed or cancelled | **View process** on the notice |
 
