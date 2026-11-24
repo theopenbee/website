@@ -23,7 +23,7 @@ Commands work in every chat app, the desktop app and the web console. Send the c
 ## Notes
 
 - `/clear` asks for confirmation while tasks are running: send it again within 30 seconds, or `/clear cancel`. Scheduled tasks are kept.
-- In Lark / Feishu, `/status`, `/engine`, `/cancel` and the `/clear` confirmation come with buttons, so you can click instead of typing.
+- In the web chat, the desktop app and Lark / Feishu, `/status`, `/engine`, `/cancel` and the `/clear` confirmation come with buttons, so you can click instead of typing.
 - `/engine` waits until nothing is running.
 - In a worker's own chat, `/stop` and `/clear` act on that worker.
 - In groups, `@bot /status` works too.
