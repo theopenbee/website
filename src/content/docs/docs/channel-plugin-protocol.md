@@ -17,6 +17,7 @@ A plugin is a directory with an `openbee.plugin.json` manifest at its root:
   "description": { "en": "Discord bot channel" },
   "command": ["node", "dist/index.js"],
   "version": "0.1.0",
+  "icon": "icon.svg",
   "config": [
     { "key": "token", "type": "secret", "required": true, "label": { "en": "Bot token", "zh": "机器人 Token" } },
     { "key": "allowed_guilds", "type": "list" },
@@ -34,9 +35,21 @@ A plugin is a directory with an `openbee.plugin.json` manifest at its root:
 | `command` | Program and arguments, run with the plugin directory as working directory. `node` runs on the JavaScript runtime openbee picks (see [Runtime](#runtime)). Otherwise an absolute path is used as-is; a path starting with `.` or containing a separator is relative to the plugin directory; anything else is looked up on `PATH`. |
 | `setup` | Optional. `{"command": [...], "label": ...}`: an interactive step `openbee plugin configure` runs before asking for `config[]`, for platforms that log in with a QR code or a browser instead of a pasted token. `command` follows the same rules as the top-level `command`; `label` names the step in prompts. See [Setup](#setup). |
 | `version` | Optional. `package.json` `version` wins when present. |
+| `icon` | Optional. Path of an SVG file inside the plugin, shown wherever plugins are listed; without it openbee shows the initials of `name`. See [Icon](#icon). |
 | `config[]` | Settings openbee stores for the plugin and validates before starting it. `type` is `string`, `secret`, `bool`, `int` or `list` (list of strings). `required`, `default`, `label` and `help` are optional. `random_default: true` (only for `string`) makes openbee fill in a random value when the field has no value yet, which suits access codes. `enabled` and `bot_name` are reserved keys and cannot be declared. |
 
 One plugin provides exactly one channel.
+
+### Icon
+
+openbee paints the icon in the colour of the text around it, so draw it in one colour with `currentColor`; only its shape and opacity are kept. A manifest whose icon breaks these rules is rejected:
+
+| Rule | |
+|---|---|
+| Location | A relative path inside the plugin directory, ending in `.svg`; not a symlink. Include the file in the npm package. |
+| Size | At most 32 KB. |
+| Root | One `<svg xmlns="http://www.w3.org/2000/svg">` element. A square `viewBox` fits best. |
+| Not allowed | `<script>`, `<foreignObject>`, `on*` attributes, `href` values other than `#id`, DOCTYPE or ENTITY declarations, processing instructions other than `<?xml ...?>`. |
 
 ## Installation
 
@@ -83,8 +96,8 @@ openbee stores each plugin's settings in its database, encrypted with `server.en
 | `PUT /api/plugins/<id>/settings` `{"bot_name": "...", "config": {...}}` | Validates against `config[]` and saves. A `secret` field sent empty keeps its stored value. A `random_default` field that has no value gets a random one. Restarts only this plugin when it is enabled. |
 | `POST /api/plugins/<id>/enable`, `/disable`, `/restart` | Starts or stops only this plugin. |
 | `DELETE /api/plugins/<id>` | Stops the plugin, removes the package, and deletes its settings and `~/.openbee/plugins/data/<id>/`. |
-| `GET /api/plugins`, `GET /api/plugins/<id>` | Lists plugins with their `type` (`channel` or `engine`), state (`not_configured`, `disabled`, `starting`, `running`, `retrying`, `failed`; engines have their own [states](/docs/engine-plugin-protocol/#states)) and last error. Secret values are masked. |
-| `GET /api/plugins/catalog` | Reads the plugin catalog `@theopenbee/plugins` from npm (npmmirror as a fallback, cached for 10 minutes). `OPENBEE_PLUGIN_CATALOG` can point to a local `catalog.json` file or URL. |
+| `GET /api/plugins`, `GET /api/plugins/<id>` | Lists plugins with their `type` (`channel` or `engine`), state (`not_configured`, `disabled`, `starting`, `running`, `retrying`, `failed`; engines have their own [states](/docs/engine-plugin-protocol/#states)), last error and `icon` (SVG markup, left out when the plugin has none). Secret values are masked. |
+| `GET /api/plugins/catalog` | Reads the plugin catalog `@theopenbee/plugins` from npm (npmmirror as a fallback, cached for 10 minutes). `OPENBEE_PLUGIN_CATALOG` can point to a local `catalog.json` file or URL. An entry's `icon` is SVG markup; one that breaks the [icon rules](#icon) is left out. |
 
 When openbee starts it starts every enabled plugin. Before it sends `initialize.config` it applies manifest defaults, checks required fields and types, and leaves out `bot_name`. A plugin that fails to start is marked `failed`; other channels are not affected. `bot_name` behaves as for built-in channels: an `@bot_name` mention is stripped from incoming text, and no worker may use that name.
 
@@ -131,6 +144,16 @@ UTF-8 JSON-RPC 2.0, one message per line (`\n`-terminated). Lines longer than 8 
 
 Reply `{"protocol_version": 1}` once the plugin is connected to its platform. After replying the plugin may send `inbound` notifications.
 
+The reply may also declare optional features:
+
+```json
+{ "protocol_version": 1, "capabilities": { "buttons": true } }
+```
+
+| Capability | Meaning |
+|---|---|
+| `buttons` | The plugin can show `send.buttons`. Without it openbee sends no buttons, and the text alone tells the user what to reply. |
+
 Errors:
 
 | Code | Meaning | openbee reaction |
@@ -148,7 +171,11 @@ Errors:
   "proactive": false,
   "reply_to": { "message_id": "m1", "raw": "<raw from the inbound message>" },
   "content": "text",
-  "media": { "path": "/abs/path/report.pdf", "name": "report.pdf" }
+  "media": { "path": "/abs/path/report.pdf", "name": "report.pdf" },
+  "buttons": [
+    { "label": "Clear", "text": "/clear", "style": "danger" },
+    { "label": "Cancel", "text": "/clear cancel" }
+  ]
 }
 ```
 
@@ -157,6 +184,7 @@ Errors:
 - `reply_to` is omitted when there is nothing to reply to. `reply_to.message_id` is the plugin's own `message_id` (without the channel prefix); `reply_to.raw` is the plugin's own `raw`, returned unchanged. If the channel id used to belong to a built-in channel, messages stored before the switch carry that channel's raw payload instead, without `message_id`.
 - `proactive: true` means openbee is starting the conversation (scheduled task results, notifications). The plugin should post to `chat_id` without quoting a message.
 - Reply `{}` or `{"platform_message_id": "..."}`. Error messages are passed to the caller (for example a worker calling the `send_message` MCP tool).
+- `buttons` is only sent to plugins that declared the `buttons` capability, and only together with `content`. Show them under the text. `style` is omitted or `danger` (a destructive action). See [Buttons](#buttons) for what a click does.
 - The deadline follows the caller and is capped at 120s; for replies sent through the `send_message` MCP tool it is 50s. When the caller gives up, openbee sends `$/cancelRequest`.
 
 #### `$/cancelRequest` (notification)
@@ -210,6 +238,22 @@ Tells openbee that a chat got a new id (for example a Telegram group upgraded to
 #### `log` (notification)
 
 `{"level": "debug" | "info" | "warn" | "error", "message": "...", "fields": {...}}` is written to the openbee log with component `plugin:<id>`.
+
+## Buttons
+
+A click answers for the clicking user, so the plugin turns it into an `inbound` notification:
+
+| Field | Value |
+|---|---|
+| `text` | The button's `text`. |
+| `sender_id` | The user who clicked. |
+| `chat_id`, `session_scope` | Those of the `send` that carried the buttons, so the click lands in the same session. |
+| `message_id` | The id of the message that carried the buttons. openbee deduplicates on it, so only the first click on a message counts. |
+| `raw` | Whatever lets the plugin reply to the message that carried the buttons. |
+
+Only the session's owner should be able to click: in a group, refuse clicks whose user does not match `session_scope` when the scope is a user id. After a click, replace the buttons with the chosen label so nobody clicks again.
+
+openbee uses buttons for `/clear` confirmations, `/status`, `/engine`, `/cancel`, confirmations of scheduled and countdown tasks, and `send_message` calls with `options`. A worker's options carry `@<worker name> <option>` as `text`, so the answer goes straight back to that worker.
 
 ## Error codes
 
