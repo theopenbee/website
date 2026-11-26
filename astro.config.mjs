@@ -70,6 +70,7 @@ export default defineConfig({
           items: [
             { slug: "docs/channel-plugin-protocol", label: "Channel plugin protocol", translations: { "zh-CN": "渠道插件协议" } },
             { slug: "docs/engine-plugin-protocol", label: "Engine plugin protocol", translations: { "zh-CN": "引擎插件协议" } },
+            { slug: "docs/avatar-plugin-protocol", label: "Avatar plugin protocol", translations: { "zh-CN": "头像插件协议" } },
           ],
         },
       ],

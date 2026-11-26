@@ -36,6 +36,10 @@ The last four are under **Advanced settings**.
 
 The dot on the avatar shows **Idle**, **Working** or **Error**. A working worker queues further tasks. Error means the last run failed, for example because the engine is not installed. `/list` shows every worker's status.
 
+## Avatar
+
+With an avatar plugin installed, such as `mfers` from the Marketplace, every new worker gets an avatar no other worker uses yet. Existing workers keep their initials. To change it, click **Edit**, then **Change avatar**: pick one, **Random** or **Initials**, then save. Disable the plugin and workers show their initials again.
+
 ## Edit
 
 Click the worker's name at the top of its chat, then **Edit**. The **Constraints**, **Permissions** and **Env** tabs are there too. Or tell Bee.

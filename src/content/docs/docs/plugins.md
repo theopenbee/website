@@ -1,9 +1,9 @@
 ---
 title: Plugins
-description: Engines and chat channels, from the app or the command line.
+description: Engines, chat channels and worker avatars, from the app or the command line.
 ---
 
-Engines and chat channels are plugins. A running OpenBee installs, configures, enables and removes them without a restart.
+Engines, chat channels and worker avatars are plugins. A running OpenBee installs, configures, enables and removes them without a restart.
 
 ## Official plugins
 
@@ -20,6 +20,7 @@ Engines and chat channels are plugins. A running OpenBee installs, configures, e
 | Channel | `telegram` | Telegram |
 | Channel | `discord` | Discord |
 | Channel | `linear` | Linear |
+| Avatars | `mfers` | 300 mfers by sartoshi (CC0) |
 
 ## From the app
 
@@ -44,10 +45,14 @@ An engine plugin drives an agent CLI, so install the CLI and sign in to it first
 openbee plugin configure claude --set path=/path/to/claude
 ```
 
+## Avatars
+
+An avatar plugin is enabled when it is installed. New workers then get a random avatar that no other worker uses yet; existing workers keep their initials. To change a worker's avatar, see [Workers](/docs/workers/#avatar). Disable or remove the plugin and workers show their initials again.
+
 ## Runtime
 
-Plugins run on Bun or Node.js. If neither is installed, OpenBee downloads Bun into `~/.openbee/runtime`.
+Channel and engine plugins run on Bun or Node.js. If neither is installed, OpenBee downloads Bun into `~/.openbee/runtime`. Avatar plugins are just images and need no runtime.
 
 ## Write your own
 
-See the [channel plugin protocol](/docs/channel-plugin-protocol/) and the [engine plugin protocol](/docs/engine-plugin-protocol/).
+See the [channel plugin protocol](/docs/channel-plugin-protocol/), the [engine plugin protocol](/docs/engine-plugin-protocol/) and the [avatar plugin protocol](/docs/avatar-plugin-protocol/).

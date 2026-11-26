@@ -1,9 +1,9 @@
 ---
 title: 插件
-description: 引擎和聊天渠道，在应用里或命令行中管理。
+description: 引擎、聊天渠道和员工头像，在应用里或命令行中管理。
 ---
 
-引擎和聊天渠道都是插件。OpenBee 运行时即可安装、配置、启用和卸载它们，无需重启。
+引擎、聊天渠道和员工头像都是插件。OpenBee 运行时即可安装、配置、启用和卸载它们，无需重启。
 
 ## 官方插件
 
@@ -20,6 +20,7 @@ description: 引擎和聊天渠道，在应用里或命令行中管理。
 | 渠道 | `telegram` | Telegram |
 | 渠道 | `discord` | Discord |
 | 渠道 | `linear` | Linear |
+| 头像 | `mfers` | 300 个 mfer，sartoshi 作品（CC0） |
 
 ## 在应用里管理
 
@@ -44,10 +45,14 @@ openbee plugin list                # 查看所有插件及其运行状态
 openbee plugin configure claude --set path=/path/to/claude
 ```
 
+## 头像
+
+头像插件装好即启用。之后新建的员工会随机分配一个还没人用的头像，已有员工保持文字头像。换头像的方法见[员工](/zh/docs/workers/#头像)。停用或卸载插件后，员工改回显示文字头像。
+
 ## 运行时
 
-插件运行在 Bun 或 Node.js 上。两者都没有时，OpenBee 会把 Bun 下载到 `~/.openbee/runtime`。
+渠道和引擎插件运行在 Bun 或 Node.js 上。两者都没有时，OpenBee 会把 Bun 下载到 `~/.openbee/runtime`。头像插件只有图片，不需要运行时。
 
 ## 开发插件
 
-见[渠道插件协议](/zh/docs/channel-plugin-protocol/)和[引擎插件协议](/zh/docs/engine-plugin-protocol/)。
+见[渠道插件协议](/zh/docs/channel-plugin-protocol/)、[引擎插件协议](/zh/docs/engine-plugin-protocol/)和[头像插件协议](/zh/docs/avatar-plugin-protocol/)。
